@@ -1,4 +1,3 @@
-import pytest
 import sys
 sys.path.insert(0, '..')
 from stf_scraping import Diario
