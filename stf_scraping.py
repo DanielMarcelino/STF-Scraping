@@ -1,3 +1,7 @@
+from urllib.request import Request, urlopen
+from urllib.error import URLError, HTTPError
+from bs4 import BeautifulSoup
+
 class Data:
     def __init__(self, data: str):
         self.__data = data
@@ -47,6 +51,51 @@ class Data:
     def data_formatada(self):
         return self.__data.replace("-", "/")
 
+class Diario:
+    def __init__(self, data: str):
+        self.__url_pdf = []
+        self.__data = data
+        self.__html = ""
+        self.__headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36'}
+
+    def __verifica_url(self, url):
+        try:
+            request = Request(url, headers=self.__headers)
+            response = urlopen(request)
+            return  response.read()
+        except HTTPError as error:
+            print(error.status, error.reason)
+            exit()
+        except URLError as error:
+            print(error.reason)
+            exit()
+
+    def checa_existencia_de_diario(self):
+        try:
+            url = 'https://www.stf.jus.br/portal/diariojusticaeletronico/montarDiarioEletronico.asp?tp_pesquisa=0&dataP='
+            url = url + self.__data
+            self.__html = self.__verifica_url(url)
+            return self.__html != b"0|"
+        except:
+            return False
+
+    def __trata_html(self):
+        self.__html = self.__html.decode('utf-8')
+        self.__html = self.__html.split()
+        self.__html = " ".join(self.__html)
+        self.__html = self.__html.replace('> <', '><')
+        self.__html = self.__html.replace('" ', '"')
+        self.__html = self.__html.replace(' "', '"')
+        self.__html = BeautifulSoup(self.__html, 'html.parser')
+
+    def get_url_pdf(self):
+        self.__trata_html()
+        self.__html = self.__html.findAll('a', target='_blank')
+        links = []
+        for link in self.__html:
+            links.append(str(link).replace('<a href="', '').replace(
+                '" target="_blank"><img border="0" src="imagem/ico_pdf_integral.jpg"/></a>', ''))
+        return links
 
 
 
