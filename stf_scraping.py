@@ -2,6 +2,7 @@ from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
 from bs4 import BeautifulSoup
 import hashlib
+import sys
 
 
 class Data:
@@ -53,7 +54,7 @@ class Data:
         return self.__data.replace("-", "/")
 
 
-class Diario():
+class Diario:
     def __init__(self, data):
         self.__data = data
         self.__lista_url_pdf = []
@@ -93,7 +94,6 @@ class Diario():
         self.__html = self.__html.replace('" ', '"')
         self.__html = self.__html.replace(' "', '"')
 
-
     def get_url_pdf(self):
         self.__trata_html()
         self.__html = BeautifulSoup(self.__html, 'html.parser')
@@ -102,7 +102,7 @@ class Diario():
             link = str(link)
             link = link.replace('<a href="', '')
             link = link.replace('" target="_blank"><img border="0" src="imagem/ico_pdf_integral.jpg"/></a>', '')
-            link = link.replace('amp;','')
+            link = link.replace('amp;', '')
             self.__lista_url_pdf.append(link)
         return self.__lista_url_pdf
 
@@ -134,12 +134,17 @@ class Diario():
     def inicia_busca(self):
         if not self.__checa_existencia_de_diario():
             return False
+
         self.get_url_pdf()
 
+        return True
 
-
-def main():
-    data_publicacao = Data("15-09-2021")
+def main(args):
+    try:
+        data_publicacao = Data(args[1])
+    except:
+        print("Nenhuma data foi informada.")
+        exit()
 
     if not data_publicacao.valida_data():
         print("Data inválida!", end="\n\n")
@@ -151,7 +156,7 @@ def main():
 
     busca_diario = Diario(data_publicacao.data_formatada())
 
-    if busca_diario.inicia_busca():
+    if not busca_diario.inicia_busca():
         print("Não há diários publicados na data informada.")
         exit()
     lista_md5 = busca_diario.get_lista_pdf_md5()
@@ -163,7 +168,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main(sys.argv))
 
 
 
