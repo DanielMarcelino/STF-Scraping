@@ -3,16 +3,6 @@ from urllib.error import URLError, HTTPError
 from bs4 import BeautifulSoup
 import hashlib
 
-class DataInvalida(Exception):
-    pass
-
-class ErrorHTTP(Exception):
-    pass
-
-class ErrorURL(Exception):
-    pass
-
-
 
 class Data:
     def __init__(self, data: str):
@@ -57,14 +47,14 @@ class Data:
         if self.__checa_tamanho() and self.__checa_separador() and self.__checa_dia() and self.__checa_mes() and  self.__checa_ano():
             return True
         else:
-            raise DataInvalida("Data inválida!")
+            return False
 
     def data_formatada(self):
         return self.__data.replace("-", "/")
 
-class Diario(Data):
+
+class Diario():
     def __init__(self, data):
-        super().__init__(data)
         self.__data = data
         self.__lista_url_pdf = []
         self.__html = ""
@@ -80,12 +70,13 @@ class Diario(Data):
             response = urlopen(request)
             return  response.read()
         except HTTPError as error:
-            raise ErrorHTTP(error.status, error.reason)
+            print(error.status, error.reason)
+            exit()
         except URLError as error:
-            raise ErrorURL(error.reason)
+            print(error.reason, "\nVerifique sua conexão com a internet.")
+            exit()
 
     def __checa_existencia_de_diario(self):
-        self.valida_data()
         try:
             url = 'https://www.stf.jus.br/portal/diariojusticaeletronico/montarDiarioEletronico.asp?tp_pesquisa=0&dataP='
             url = url + self.__data
@@ -140,8 +131,39 @@ class Diario(Data):
                 arquivo.write(pdf)
             i += 1
 
+    def inicia_busca(self):
+        if not self.__checa_existencia_de_diario():
+            return False
+        self.get_url_pdf()
 
 
+
+def main():
+    data_publicacao = Data("15-09-2021")
+
+    if not data_publicacao.valida_data():
+        print("Data inválida!", end="\n\n")
+        print("-- Instrução --")
+        print("Formato: DD-MM-AAAA")
+        print("Separador: '-'")
+        print("Intervalos: 0 < DIA < 31 / 0 < MES < 12 / 0 < ANO < 9999")
+        exit()
+
+    busca_diario = Diario(data_publicacao.data_formatada())
+
+    if busca_diario.inicia_busca():
+        print("Não há diários publicados na data informada.")
+        exit()
+    lista_md5 = busca_diario.get_lista_pdf_md5()
+
+    busca_diario.baixa_pdf_renomeado_com_md5()
+
+    for md5 in lista_md5:
+        print(md5)
+
+
+if __name__ == "__main__":
+    main()
 
 
 
