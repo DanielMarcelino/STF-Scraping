@@ -1,7 +1,8 @@
 import pytest
 import sys
 sys.path.insert(0, '..')
-from stf_scraping import Diario, DataInvalida
+from stf_scraping import Diario
+
 
 # É nescessario conexão á internet para realizar os testes abaixo
 def test_valida_existencia_de_diario_para_03_05_2019():
@@ -13,9 +14,8 @@ def test_invalida_existencia_de_diario_para_16_11_2021():
     assert diario._Diario__checa_existencia_de_diario() == False
 
 def test_obtem_erro_quando_uma_data_em_formato_inesperado_quebra_a_pagina():
-    with pytest.raises(DataInvalida):
-        diario = Diario("16-10-20021")
-        assert diario._Diario__checa_existencia_de_diario() == False
+    diario = Diario("16-10-20021")
+    assert diario._Diario__checa_existencia_de_diario() == False
 
 def test_obtem_uma_url_de_pdf_na_data_04_10_2021():
     diario = Diario("04-10-2021")
