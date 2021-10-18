@@ -31,7 +31,7 @@ Por fim, execute o script com o seguinte comando:
 # Execute o script
 $ python stf_scraping.py <data>
 ```
-O input da data é feito por meio de argumento de linha de comando. É importante que a data informada siga o formato esperado (DD-MM-AAAA).
+O input da data é feito por meio de argumento de linha de comando. A data deve seguir o seguinte formato: `DD-MM-AAAA`.
 
 A data admite dois tipos de caracteres separadores diferentes: `-` e `/`. Caso a data informada não satisfaça os requisitos o script não executará a busca de diário. Se não houver diários publicados na data informada, uma mensagem será exibida no terminal.
 #### Exemplo de execução
