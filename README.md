@@ -22,7 +22,7 @@ Em seguida, clone o repositório:
 
 ```bash
 # Clone este repositório
-$ git clone <https://github.com/DanielMarcelino/STF-Scraping.git>
+$ git clone https://github.com/DanielMarcelino/STF-Scraping.git
 ```
 
 Por fim, execute o script com o seguinte comando:
