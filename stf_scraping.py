@@ -14,8 +14,8 @@ class Data:
 
     def __checa_separador(self):
         try:
-            separador_1 = self.__data[2] == '-'
-            separador_2 = self.__data[5] == '-'
+            separador_1 = (self.__data[2] == '-') or (self.__data[2] == '/')
+            separador_2 = (self.__data[5] == '-') or (self.__data[5] == '/')
             return separador_1 and separador_2
         except:
             return False
@@ -149,9 +149,9 @@ def main(args):
     if not data_publicacao.valida_data():
         print("Data inválida!", end="\n\n")
         print("-- Instrução --")
-        print("Formato: DD-MM-AAAA")
-        print("Separador: '-'")
-        print("Intervalos: 0 < DIA < 31 / 0 < MES < 12 / 0 < ANO < 9999")
+        print("Formato da data: DD-MM-AAAA")
+        print("Separadores esperados: '-' ou '/'")
+        print("Intervalos: 0 < DIA <= 31 / 0 < MES <= 12 / 0 < ANO <= 9999")
         exit()
 
     busca_diario = Diario(data_publicacao.data_formatada())
@@ -159,6 +159,7 @@ def main(args):
     if not busca_diario.inicia_busca():
         print("Não há diários publicados na data informada.")
         exit()
+
     lista_md5 = busca_diario.get_lista_pdf_md5()
 
     busca_diario.baixa_pdf_renomeado_com_md5()
