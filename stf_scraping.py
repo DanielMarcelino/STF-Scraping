@@ -151,7 +151,6 @@ def main(args):
         print("-- Instrução --")
         print("Formato da data: DD-MM-AAAA")
         print("Separadores esperados: '-' ou '/'")
-        print("Intervalos: 0 < DIA <= 31 / 0 < MES <= 12 / 0 < ANO <= 9999")
         exit()
 
     busca_diario = Diario(data_publicacao.data_formatada())
