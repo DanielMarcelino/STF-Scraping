@@ -45,7 +45,7 @@ def test_obtem_nenhuma_url_de_pdf_na_data_12_10_2021():
     assert diario._Diario__checa_existencia_de_diario() == False
     assert len(diario.get_url_pdf()) == 0
 
-def test_obtem_um_arquivo_pdf_da__lista_de_url_na_data_04_10_2021():
+def test_obtem_um_arquivo_pdf_da_lista_de_url_na_data_04_10_2021():
     diario = Diario("04-10-2021")
     assert diario._Diario__checa_existencia_de_diario() == True
     assert len(diario.get_url_pdf()) == 1

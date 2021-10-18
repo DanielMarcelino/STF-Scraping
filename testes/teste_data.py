@@ -3,7 +3,7 @@ sys.path.insert(0, '..')
 from stf_scraping import Data
 
 # Formato DD-MM-AAAA
-# Separador "-"
+# Separadores esperados:  "-" ou "/"
 # 0 < DIA < 31 / 0 < MES < 12 / 0 < ANO < 9999
 
 def test_valida_data_que_respeita_o_formato_separador_intervalo():
@@ -65,19 +65,22 @@ def test_invalida_data_em_que_o_mes_contem_somente_uma_casa_decimal_sem_zero():
     data = Data("05-1-2021")
     assert data.valida_data() == False
 
+def test_valida_data_em_que_contem_barra_como_separador():
+    data = Data("05/12/2021")
+    assert data.valida_data() == True
 
 def test_invalida_data_em_que_contem_separadores_inesperados():
-    data = Data("05/12/2021")
+    data = Data("05+12.2021")
     assert data.valida_data() == False
 
 
 def test_invalida_data_em_que_contem_o_primeiro_separador_inesperado():
-    data = Data("05/12-2021")
+    data = Data("05\12-2021")
     assert data.valida_data() == False
 
 
 def test_invalida_data_em_que_contem_o_segundo_separador_inesperado():
-    data = Data("05-12/2021")
+    data = Data("05-12,2021")
     assert data.valida_data() == False
 
 
