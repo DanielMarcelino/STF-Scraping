@@ -6,7 +6,7 @@ O principal objetivo, além de desenvolver a solução para o enunciado da propo
 Dentre os desafios em alcançar a solução da proposta, o principal obstáculo foi lidar com a página de diários do Supremo Tribunal Federal. A página oferece duas formas de se buscar um diário oficial: por seleção manual, na interface em forma de calendário e via formulário. A seleção manual é baseada em java script, esse caminho exigiria a aplicação de uma biblioteca complexa no projeto. A segunda via, por formulário, pareceu mais atraente aos planos de desenvolvimento da solução. No entanto, ainda seria  relativamente complicado lidar com o formulário da página. 
 
 
-## Metodos
+## Métodos
 Investindo tempo em investigar por outras formas de requisitar os diários da página e usando uma ferramenta de desenvolvedor presente no navegador web, foi possível encontrar um método que satisfez a necessidade de simplificar o desenvolvimento da solução.
 
 A investigação revelou que o bloco em que os diários são exibidos é um módulo importado através de uma url (https://www.stf.jus.br/portal/diariojusticaeletronico/montarDiarioEletronico.asp?tp_pesquisa=0&dataP=15/09/2021). É possível requisitar a lista de diários, na data desejada, apenas modificando a data contida na url. Descoberto isso, foi usada a biblioteca urllib para capturar o código html da página pela response e extrair a url de cada arquivo PDF contida na página através dos recursos do pacote Beautiful Soup.
