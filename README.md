@@ -2,7 +2,7 @@
 
 ## 📋️ Descrição
 
-Este é um simples script que baixa e retorna os hash MD5 dos diários oficiais do Supremo Tribunal Federal em uma data de publicação.
+Este é um simples script que baixa e retorna os hash MD5 dos diários oficiais do Supremo Tribunal Federal filtrados pela data de publicação.
 
 ### 🛠 Tecnologias
 
@@ -33,7 +33,7 @@ $ python stf_scraping.py <data>
 ```
 O input da data é feito por meio de argumento de linha de comando. A data deve seguir o seguinte formato: `DD-MM-AAAA`.
 
-A data admite apenas `-` como caractere separadore. Caso a data informada não satisfaça os requisitos o script não executará a busca de diário. Se não houver diários publicados na data informada, uma mensagem será exibida no terminal.
+A data admite apenas o caractere `-` como separador. Caso a data informada não satisfaça os requisitos o script não executará a busca de diário. Se não houver diários publicados na data informada, uma mensagem será exibida no terminal.
 #### Exemplo de execução
 A execução do script com a data de busca igual à `15-09-2021` retorna o seguinte resultado:
 ```bash
