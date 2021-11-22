@@ -47,9 +47,7 @@ class Diario:
 
     def __trata_html(self):
         self.__html = self.__html.decode('utf-8')
-        self.__html = self.__html.split()
         self.__html = " ".join(self.__html)
-        self.__html = self.__html.replace('> <', '><')
         self.__html = self.__html.replace('" ', '"')
         self.__html = self.__html.replace(' "', '"')
 
@@ -98,14 +96,15 @@ class Diario:
 
 def main(args):
     try:
-        data = args[1]
+        data_informada = args[1]
     except:
         print("Nenhuma data foi informada.")
         exit()
-    if not valida_data(data):
+    data_valida = valida_data(data_informada)
+    if not data_valida:
         print("Data inválida!", end="\n")
         exit()
-    busca_diario = Diario(data)
+    busca_diario = Diario(data_valida)
     if not busca_diario.inicia_busca():
         print("Não há diários publicados na data informada.")
         exit()
