@@ -47,6 +47,7 @@ class Diario:
 
     def __trata_html(self):
         self.__html = self.__html.decode('utf-8')
+        self.__html = self.__html.split()
         self.__html = " ".join(self.__html)
         self.__html = self.__html.replace('" ', '"')
         self.__html = self.__html.replace(' "', '"')
@@ -54,12 +55,9 @@ class Diario:
     def get_url_pdf(self):
         self.__trata_html()
         self.__html = BeautifulSoup(self.__html, 'html.parser')
-        self.__html = self.__html.findAll('a', target='_blank')
+        self.__html = self.__html.find_all('a', target='_blank')
         for link in self.__html:
-            link = str(link)
-            link = link.replace('<a href="', '')
-            link = link.replace('" target="_blank"><img border="0" src="imagem/ico_pdf_integral.jpg"/></a>', '')
-            link = link.replace('amp;', '')
+            link = link.get("href")
             self.__lista_url_pdf.append(link)
         return self.__lista_url_pdf
 
