@@ -62,8 +62,8 @@ class Diario:
         return self.__lista_url_pdf
 
     def __gera_lista_arquivos_binarios_pdf(self):
+        prefixo_url = 'http://www.stf.jus.br/portal/diariojusticaeletronico/'
         for url in self.__lista_url_pdf:
-            prefixo_url = 'http://www.stf.jus.br/portal/diariojusticaeletronico/'
             url = prefixo_url + url
             self.__lista_binarios_pdf.append(self.__verifica_url_captura_response(url))
 
