@@ -1,3 +1,4 @@
+from os import replace
 from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
 from bs4 import BeautifulSoup
@@ -8,6 +9,7 @@ import sys
 
 def valida_data(data):
     try:
+        data = data.replace("-", "/")
         datetime.strptime(data, "%d/%m/%Y")
         return data
     except:
