@@ -1,4 +1,3 @@
-from os import replace
 from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
 from bs4 import BeautifulSoup
@@ -113,4 +112,3 @@ def main(args):
 
 if __name__ == "__main__":
     sys.exit(main(sys.argv))
-    
