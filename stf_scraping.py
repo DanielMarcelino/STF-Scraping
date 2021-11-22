@@ -22,8 +22,6 @@ class Diario:
         self.__lista_binarios_pdf = []
         self.__lista_md5 = []
 
-
-
     def __verifica_url_captura_response(self, url):
         try:
             request = Request(url, headers=self.__headers)
@@ -93,9 +91,7 @@ class Diario:
     def inicia_busca(self):
         if not self.__checa_existencia_de_diario():
             return False
-
         self.get_url_pdf()
-
         return True
 
 def main(args):
@@ -104,28 +100,17 @@ def main(args):
     except:
         print("Nenhuma data foi informada.")
         exit()
-
     if not valida_data(data):
         print("Data inválida!", end="\n")
         exit()
-
     busca_diario = Diario(data)
-
     if not busca_diario.inicia_busca():
         print("Não há diários publicados na data informada.")
         exit()
-
     lista_md5 = busca_diario.get_lista_pdf_md5()
-
     busca_diario.baixa_pdf_renomeado_com_md5()
-
     for md5 in lista_md5:
         print(md5)
 
-
 if __name__ == "__main__":
     sys.exit(main(sys.argv))
-
-
-
-
