@@ -2,7 +2,7 @@
 
 ## 📋️ Descrição
 
-Este é um simples script que baixa e retorna os hash MD5 dos diários oficiais do Supremo Tribunal Federal em uma data de publicação.
+Este é um simples script que baixa e retorna os hash MD5 dos diários oficiais do Supremo Tribunal Federal filtrados pela data de publicação.
 
 ### 🛠 Tecnologias
 
