@@ -75,6 +75,8 @@ class PDFDownloader:
     def __init__(self, lista_urls_pdf:list) -> None:
         self._lista_md5_pdfs = self.__obtem_arquivos_pdfs(lista_urls_pdf)
 
+    headers = {'user-agent' : 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36'}
+
     def __obtem_arquivos_pdfs(self, lista_urls_pdfs:list) -> list:
         if not lista_urls_pdfs:
             raise Excecoes.URLInvalidaOuIndisponivel()
@@ -93,7 +95,7 @@ class PDFDownloader:
 
     def __obtem_response(self, url:str) -> str:
         try:
-            response = requests.get(url, headers = Scraper.headers)
+            response = requests.get(url, headers = PDFDownloader.headers)
         except:
             raise Excecoes.URLInvalidaOuIndisponivel()
         if response.status_code >= 500:
