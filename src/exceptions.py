@@ -14,7 +14,7 @@ def indisponibilidade_temporaria():
 
 
 def diario_nao_publicado():
-    print('Diário não publicado!')
+    print('Não há diarios publicados na data informada!')
     exit()
 
 
