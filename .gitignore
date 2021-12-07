@@ -2,3 +2,9 @@ venv/
 .idea/
 testes/.pytest_cache
 testes/__pycache__
+diarios/
+*/__pycache__/
+*.pyc
+.vscode
+.pytest_cache
+.hidden

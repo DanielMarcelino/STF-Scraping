@@ -2,38 +2,40 @@
 
 ## 📋️ Descrição
 
-Este é um simples script que baixa e retorna os hash MD5 dos diários oficiais do Supremo Tribunal Federal em uma data de publicação.
+Este é um simples script que baixa e retorna os hash MD5 dos diários oficiais do Supremo Tribunal Federal filtrados pela data de publicação.
 
 ### 🛠 Tecnologias
 
 Os seguintes recursos foram usadas na construção do projeto:
 - [Python 3.6](https://www.python.org/downloads/release/python-360/)
+- [Requests](https://docs.python-requests.org/en/latest/)
 - [Beautiful Soupp](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
 - [Pytest](https://docs.pytest.org/en/6.2.x/)
 
 
 ### ▶️ Como executar o script
-Antes de executar, caso não tenha em sua máquina, é necessário instalar o pacote Beautiful Soup:
-```bash
-# Instale o Beautiful Soup
-$ pip install beautifulsoup4
-```
-Em seguida, clone o repositório:
 
+Clone o repositório:
 ```bash
 # Clone este repositório
 $ git clone https://github.com/DanielMarcelino/STF-Scraping.git
+```
+
+Execute o seguinte comando para instalar os modulos necessários para execução do script:
+```bash
+# Instale os modulos
+$ pip install -r requeriments.txt
 ```
 
 Por fim, execute o script com o seguinte comando:
 
 ```bash
 # Execute o script
-$ python stf_scraping.py <data>
+$ python run.py <data>
 ```
 O input da data é feito por meio de argumento de linha de comando. A data deve seguir o seguinte formato: `DD-MM-AAAA`.
 
-A data admite dois tipos de caracteres separadores diferentes: `-` e `/`. Caso a data informada não satisfaça os requisitos o script não executará a busca de diário. Se não houver diários publicados na data informada, uma mensagem será exibida no terminal.
+A data admite somente o caracter `-` como separador. Caso a data informada não satisfaça os requisitos o script não executará a busca de diário. Se não houver diários publicados na data informada, uma mensagem será exibida no terminal.
 #### Exemplo de execução
 A execução do script com a data de busca igual à `15-09-2021` retorna o seguinte resultado:
 ```bash
@@ -48,15 +50,10 @@ O tempo de resposta do script é relativo ao tamanho dos arquivos PDF, quantidad
 
 
 #### Execução dos testes
-Antes de executar os testes, caso não tenha o pacote Pytest,  será nescessario instalá-lo seguindo o passo à seguir:
-```bash
-# Instalar Pytest
-$ pip install -U pytest
-```
-Após instalar o Pytest, vá ao diretório `testes/` e execute o seguite comando no terminal: 
+Para executar os testes, execute o seguinte comando no diretório em que o repositório foi clonado:
 ```bash
 # Testes automáticos
-$ pytest teste_data.py teste_diario.py 
+$ pytest -v
 ```
 
 
