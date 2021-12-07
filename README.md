@@ -14,16 +14,17 @@ Os seguintes recursos foram usadas na construção do projeto:
 
 
 ### ▶️ Como executar o script
+
+Clone o repositório:
+```bash
+# Clone este repositório
+$ git clone https://github.com/DanielMarcelino/STF-Scraping.git
+```
+
 Execute o seguinte comando para instalar os modulos necessários para execução do script:
 ```bash
 # Instale os modulos
 $ pip install -r requeriments.txt
-```
-Em seguida, clone o repositório:
-
-```bash
-# Clone este repositório
-$ git clone https://github.com/DanielMarcelino/STF-Scraping.git
 ```
 
 Por fim, execute o script com o seguinte comando:
